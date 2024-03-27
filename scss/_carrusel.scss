@@ -1,0 +1,133 @@
+@mixin h1 { 
+    font-size: 30px;
+    font-weight: 600;
+}
+
+@mixin h2 { 
+    font-size: 20px;
+    font-weight: 400;
+}
+
+@mixin h3 { 
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@mixin h5 {  
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.cont_carrusel {  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.carrusel::-webkit-scrollbar {  
+    width: 0;
+}
+
+.carrusel { 
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    padding: 20px 20px 10px 20px;
+    overflow-y: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type:none;
+    scrollbar-width: none;
+
+    .carrusel_slide {   
+        display: flex;
+        justify-content: flex-start;
+        width: 375px;
+        height: 170px;
+        border-radius: 20px;
+        background-image: url(../assets/img/pexels-ahmed-muntasir-912050.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        .carrusel_slide_contenedor {    
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 24px 10px 15px 10px;
+
+            .contenedor_titulo {    
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                h1 {    
+                    @include h1;
+                    padding-bottom: 5px;
+                    font-size: 28px;
+                    font-weight: 400;
+                    color: #ffffff;
+                }
+
+                h2 {    
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    line-height: 15px;
+                    color: #ffffff;
+
+                    b { 
+                        font-size: 12px;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            .btn_xs {   
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+.carrusel.carrusel_small { 
+    padding: 10px 20px 0px 20px; 
+
+    .carrusel_slide {   
+        width: 182px;
+        height: 200px;
+        background-image: url(../assets/img/pexels-vladimir-miranda-13131597.png);
+
+        .carrusel_slide_contenedor {    
+            position: relative;
+            padding: 0;
+
+            .carrusel_card { 
+                width: 100%;
+                background-image: none;
+            }
+        }
+    }
+}
+
+.carrusel_guia {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+
+    .guia_slide {   
+        width: 10px;
+        height: 10px;
+        border-radius: 30px;
+        opacity: 1;
+        background-color: #003b9575;
+        transition: all 0.5s;
+    }
+
+    .guia_slide.active {    
+        background-color: #003B95;
+        opacity: 1;
+    }
+}
