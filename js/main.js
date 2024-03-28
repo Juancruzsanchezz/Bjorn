@@ -566,8 +566,49 @@ function cambiarSeccion(seccion) {
     document.getElementById("btn" + seccion).classList.add("active");
 }
 
+/** 
+ * ! ----------------------> Buscador Home <----------------------
+ */
 
-/**     
+const buscadorViajes = document.getElementById("buscador_home");
+function completarInput(resultado) {
+    let destino = resultado.children[1].children[0].textContent.trim();
+    buscadorViajes.value = destino;
+}
+
+const contenedorResultados = document.getElementById("resultados_busqueda");
+buscadorViajes.addEventListener("input", (texto) => { 
+    let textoBuscador = texto.target.value;
+    textoBuscador = textoBuscador.charAt(0).toUpperCase() + textoBuscador.slice(1);
+    let filtraData = vuelos.filter(vuelo => vuelo.destino.includes(textoBuscador) || vuelo.pais.includes(textoBuscador));
+
+    contenedorResultados.innerHTML = ``;
+
+    filtraData.forEach((vuelo) => { 
+        let resultado = document.createElement("div");
+        resultado.classList.add("resultado");
+        resultado.setAttribute('onclick', 'completarInput(this)');
+        resultado.innerHTML = ` 
+            <img src="${vuelo.imagen}" alt="">
+            <div class="resultado_info">    
+                <h4>
+                    ${vuelo.destino}, ${vuelo.pais}
+                </h4>
+                <h4>    
+                    ${vuelo.continente}
+                </h4>
+            </div>
+        `
+        contenedorResultados.appendChild(resultado);
+    });
+});
+document.getElementById("buscador_home").addEventListener("blur", () => {
+    setTimeout(() => {
+        contenedorResultados.innerHTML = ``;
+    }, 0);
+});
+
+/**     x
  * ! ----------------------> VUELOS <----------------------    
  **/
 // <-------------------- Crear Cards Explore --------------------> 
@@ -741,6 +782,7 @@ function filtrarVuelos(valor, boton) {
 // <----------------------- Filtro AVZ ----------------------->
 
 function filtroAvz(boton) { 
+    window.scrollTo(0,0);
     document.getElementById("sc1").style.overflow = 'hidden';
     const formFiltro = document.getElementById('contenedor_filtro_avz');
     const capa = document.getElementById('capa');
@@ -770,7 +812,7 @@ function filtroAvz(boton) {
 
         let filtraData = vuelos.filter(vuelo => {
             return (
-                (vuelo.continente === inpContinente) ||
+                (vuelo.continente === inpContinente) &&
                 (vuelo.precio >= inpDesde && vuelo.precio <= inpHasta)
             );
         });
@@ -883,53 +925,6 @@ document.getElementById("buscador").addEventListener("input", (texto) => {
       checkFavs()
     });
 })
-
-// function buscar() { 
-//     let Termbuscador = document.getElementById('buscador').value;
-//     let resultadoBusq = document.getElementById('resultados-busqueda');
-//     let filtraData = vuelos.filter(item => item.pais.includes(Termbuscador) || item.destino.includes(Termbuscador));
-//     btnSeeMore.style.display = 'none';
-//     resultadoBusq.innerHTML = '';
-//     contenedorCards.innerHTML = '';
-//     filtraData.forEach((vuelo) => {    
-//         let elementoRecu = document.createElement("div");
-//         elementoRecu.classList.add("card");
-//         elementoRecu.setAttribute('onclick', 'cargarGaleria(this)');
-//         elementoRecu.style.backgroundImage = `url(${vuelo.imagen})`;
-//         elementoRecu.innerHTML = `
-//         <div class="card_fav" onclick = "favsCard(this, event)">  
-//             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-//                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6 0.985503C9.32877 -2.436 17.6507 3.55163 6 11.25C-5.6507 3.55163 2.67123 -2.436 6 0.985503Z" fill="#979797"/>
-//             </svg>
-//         </div>
-//         <div class="card_info"> 
-//             <div class="card_info_ubi"> 
-//                 <h6>    
-//                 ${vuelo.destino}
-//                 </h6>
-//                 <div class="card_info_ubi_dest">    
-//                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-//                         <path d="M9.12433 6.70482C8.73131 7.50113 8.19934 8.29508 7.65432 9.00753C7.11099 9.71776 6.56582 10.3326 6.15576 10.7704C6.10127 10.8285 6.04924 10.8835 6 10.9351C5.95076 10.8835 5.89873 10.8285 5.84424 10.7704C5.43418 10.3326 4.88901 9.71776 4.34568 9.00753C3.80066 8.29508 3.26869 7.50113 2.87567 6.70482C2.4786 5.90031 2.25 5.14643 2.25 4.5C2.25 2.42893 3.92893 0.75 6 0.75C8.07107 0.75 9.75 2.42893 9.75 4.5C9.75 5.14643 9.5214 5.90031 9.12433 6.70482ZM6 12C6 12 10.5 7.73528 10.5 4.5C10.5 2.01472 8.48528 0 6 0C3.51472 0 1.5 2.01472 1.5 4.5C1.5 7.73528 6 12 6 12Z" fill="white"/>
-//                         <path d="M6 6C5.17157 6 4.5 5.32843 4.5 4.5C4.5 3.67157 5.17157 3 6 3C6.82843 3 7.5 3.67157 7.5 4.5C7.5 5.32843 6.82843 6 6 6ZM6 6.75C7.24264 6.75 8.25 5.74264 8.25 4.5C8.25 3.25736 7.24264 2.25 6 2.25C4.75736 2.25 3.75 3.25736 3.75 4.5C3.75 5.74264 4.75736 6.75 6 6.75Z" fill="white"/>
-//                     </svg>
-//                     <h7>    
-//                     ${vuelo.pais}
-//                     </h7>
-//                 </div>
-//             </div>
-//             <div class="card_precio">   
-//                 <h7>    
-//                     $${vuelo.precio}
-//                 </h7>
-//             </div>
-//         </div>
-//       `;
-
-//       contenedorCards.appendChild(elementoRecu);
-//       checkFavs()
-//     });
-// }    
-
 
 /**
  * ! <--------------------- Carrusel de la galeria de c/card

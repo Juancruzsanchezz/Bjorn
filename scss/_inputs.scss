@@ -37,6 +37,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 370px;
     padding: 20px 10px;
     gap: 10px;
+    z-index: 2;
     background-color: #ffffff;
     border-radius: 30px;
     box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.3);
@@ -54,6 +55,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
     .contenedor_input_s .contenedor_input { 
         width: auto;
+    }
+
+    .contenedor_input { 
+        position: relative;
     }
 
     .input {    
@@ -87,6 +92,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         .input_buscador {   
             width: 328px;
         }
+    }
+
+    .btn_l {   
+        width: 328px; 
+        height: 45px;
+        background-color: #003b94;
     }
 }
 
@@ -183,7 +194,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         gap: 10px;
         font-size: 20px;
         border: 3px solid #b3b3b3;
-        border-radius: 30px;
+        border-radius: 15px;
         color: #909090;
         background-color: #ffffff;
         transition: all 0.5s;
@@ -247,10 +258,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+.contenedor_input .input.input_buscador input { 
+    border-radius: 30px;
+}
+
 .contenedor_input_s {   
     @include caja;
+    justify-content: center;
     width: 100%;
-    gap: 28px;
+    gap: 5px;
 }
 
 .contenedor_barra_nav { 

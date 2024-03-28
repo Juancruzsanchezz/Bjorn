@@ -504,6 +504,54 @@ h1,h2,h3,h4,h5,h6,h7 {
                 }
             }
 
+            .resultados_busqueda {  
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                overflow-y: scroll;
+                top: 100%;
+                width: 328px;
+                max-height: 200px;
+                z-index: 2;
+                background-color: var(--col5);
+                border-radius: 15px;
+
+                .resultado {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: start;
+                    width: 100%;
+                    padding: 6px 10px;
+                    gap: 10px;
+                    background-color: #EEEEEE;
+
+                    img {   
+                        width: 65px;
+                        height: 65px;
+                        border-radius: 10px;
+                    }
+
+                    .resultado_info {   
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: start;
+
+                        h4:nth-child(1) {    
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: var(--col1);
+                        }
+
+                        h4:nth-child(2) {    
+                            font-size: 14px;
+                            color: #979797;
+                        }
+                    }
+                }
+            }
+
             div.contenedor_input.center {  
                 align-items: center;
                 margin: 25px 0;
@@ -562,7 +610,7 @@ h1,h2,h3,h4,h5,h6,h7 {
                     }
                 }
                 .contenedor_cards:nth-child(1) .titulo_cards {  
-                    margin-top: 25%;
+                    margin-top: 35%;
                 }
                 .contenedor_cards { 
                     display: flex;
@@ -749,6 +797,7 @@ h1,h2,h3,h4,h5,h6,h7 {
                     gap: 10px;
 
                     .btn_m {    
+                        width: 100%;
                         margin-bottom: 30px;
                     }
                 }
